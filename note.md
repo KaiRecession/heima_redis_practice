@@ -67,3 +67,15 @@ dto：DTO就是数据传输对象(Data Transfer Object)的缩写。 DTO模式，
 **JDK8之后，每个Thread维护一个ThreadLocalMap对象，这个Map的key是ThreadLocal实例本身，value是存储的值要隔离的变量，是泛型**
 
 一般都会将ThreadLocal声明成一个静态字段，因为线程里面有私有的Map变量去存储各个ThreadLocal的value，map的key就是ThreadLocal对象，想要获取就必须获得ThreadLoacl对象，**不同的线程拿到相同的ThreadLocal在自己线程的map中获取value也不同。**
+
+# 拦截器
+
+**将校验用户是否登录的操作代码提取出来，其他的各种Controller就不用再校验，拦截器将校验出来的结果通过ThreadLocal进行传递，完美这样子，看一下线程对于tomcat 的意义**
+
+1、编写拦截器的代码，继承HandlerInterceptor，里面的三个方法返回值为boolean，并且是这个接口的default方法，就算不implement也能够使用
+
+2、将便携好的拦截器配到spring中去。
+
+* 新建一个配置类实现WebMvcConfigurer接口
+* 覆盖方法addInterceptors，使用方法的形参对象的addInterceptor中放入new好的刚刚写的拦截器类的对象，再配置一下路径
+* 最后上面加上Configuration的注解即可

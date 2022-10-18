@@ -1,24 +1,15 @@
 public class Solution {
-    public static void main(String[] args) {
-        Thread t1 = new Thread(() -> {
-            ThreadLocal<Integer> tl1 = set(1);
-            ThreadLocal<Integer> tl2 = set(2);
-            System.out.println(tl1.get());
-            System.out.println(tl2.get());
-        });
-        t1.start();
-        Thread t2 = new Thread(() -> {
-            ThreadLocal<Integer> tl1 = set(3);
-            ThreadLocal<Integer> tl2 = set(4);
-            System.out.println(tl1.get());
-            System.out.println(tl2.get());
-        });
-        t2.start();
-    }
+            String str= "good";
+            char [] ch = {'a', 'b', 'c'};
+            public static void main (String[] args) {
+                Solution ex = new Solution();
+                ex.change(ex.str, ex.ch);
+                System.out.println(ex.str + "and");
+                System.out.println(ex.ch);
+            }
 
-    public static ThreadLocal<Integer> set(Integer num) {
-        ThreadLocal<Integer> threadLocal = new ThreadLocal();
-        threadLocal.set(num);
-        return threadLocal;
-    }
+            public void change(String str, char[] ch) {
+                str =  "test ok";
+                ch[0] = 'g';
+            }
 }
