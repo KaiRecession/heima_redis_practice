@@ -22,7 +22,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LoginInterceptor())
                 .order(1)
                 .excludePathPatterns(
-                        "shop/**",
+                        "/shop/**",
                         "/shop-type/**",
                         "upload/**",
                         "voucher/**",
