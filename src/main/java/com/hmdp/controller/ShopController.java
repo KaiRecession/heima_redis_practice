@@ -33,7 +33,7 @@ public class ShopController {
      */
     @GetMapping("/{id}")
     public Result queryShopById(@PathVariable("id") Long id) {
-        return shopService.queryById(id);
+        return shopService.queryById2(id);
     }
 
     /**
@@ -57,7 +57,6 @@ public class ShopController {
     @PutMapping
     public Result updateShop(@RequestBody Shop shop) {
         // 写入数据库
-
         return shopService.update(shop);
     }
 

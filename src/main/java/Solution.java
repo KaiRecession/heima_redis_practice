@@ -5,21 +5,36 @@ import java.util.*;
       ListNode() {}
       ListNode(int val) { this.val = val; }
       ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-  }
+
+     @Override
+     public int hashCode() {
+         return super.hashCode();
+     }
+
+     @Override
+     public boolean equals(Object obj) {
+         return super.equals(obj);
+     }
+ }
 class Solution {
     public static void main(String[] args) {
-        String s = "123";
-        System.out.println(Integer.toString(123));
-        System.out.println();
-        Solution solution = new Solution();
-        ListNode head = new ListNode(4);
-        ListNode temp = head;
-        temp.next =  new ListNode(2);
-        temp = temp.next;
-        temp.next =  new ListNode(1);
-        temp = temp.next;
-        temp.next =  new ListNode(3);
-        solution.sortList(head);
+//        String s = "123";
+//        System.out.println(Integer.toString(123));
+//        System.out.println();
+//        Solution solution = new Solution();
+//        ListNode head = new ListNode(4);
+//        ListNode temp = head;
+//        temp.next =  new ListNode(2);
+//        temp = temp.next;
+//        temp.next =  new ListNode(1);
+//        temp = temp.next;
+//        temp.next =  new ListNode(3);
+//        solution.sortList(head);
+//        LinkedList<Integer> integers = new LinkedList<>();
+//        integers.contains((Integer)2);
+        Object o = new Object();
+        System.out.println(Objects.hash(1, 2, 3, 4));
+        System.out.println(o.getClass());
 
     }
     public ListNode sortList(ListNode head) {
