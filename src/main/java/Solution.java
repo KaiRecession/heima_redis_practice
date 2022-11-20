@@ -38,6 +38,7 @@ class Solution {
 
     }
     public ListNode sortList(ListNode head) {
+        LinkedList<Integer> integers = new LinkedList<>();
         return sortList(head, null);
 
     }
