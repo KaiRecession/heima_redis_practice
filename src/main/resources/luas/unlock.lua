@@ -1,5 +1,4 @@
 
-
 -- 获取锁中的线程标识 get key
 local id = redis.call('get', KEYS[1])
 -- 比较线程标示与锁中的标示是否一致

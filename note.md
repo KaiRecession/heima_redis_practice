@@ -320,7 +320,7 @@ nginx默认时轮询机制，一人一次轮回来
 eval "return redis.call('set', 'name', 'jack')" 0
 ```
 
-redis的key和value本质都是字符串，但是算是两种类型，因此如果key和value不想写死，那就在后面跟上 数字 + 字符串组，数字表明这个字符串中前多少个是key类型的字符串，这些字符串放入KEYS数组，后面就全是value的，放入ARGV数组。0就代表啥也没有
+redis的key和value本质都是字符串，但是算是两种类型，因此如果key和value不想写死，那就在后面跟上 数字 + 字符串组，数字表明这个字符串中前多少个是key类型的字符串，这些字符串放入KEYS数组，后面就全是value的，放入ARGV数组。0就代表啥也没有。**在真正的代码用的时候，两个数组都直接封装成list集合了，都不需要写那个数字参数**
 
 ```redis
 eval "return redis.call('set', KEYS[1], ARGV[1])" 1 name Rose
@@ -330,3 +330,24 @@ eval "return redis.call('set', KEYS[1], ARGV[1])" 1 name Rose
 
 # 使用脚本来解决并发问题
 
+**1、提前加载lua脚本文件，防止使用的时候有io流的阻塞**
+
+static代码块就是类加载的时候会执行一次的代码
+
+```
+new ClassPathResource("luas/unlock.lua")
+```
+
+直接使用Resource下的文件
+
+# 分布式锁-redission
+
+原先自己写的锁存在的问题
+
+1、锁不可重入
+
+2、锁不可重试，失败了就直接返回
+
+3、超时释放还是有问题，锁时间的估计万一出问题了呢
+
+4、主从一致性，锁没同步，主就挂了，这个锁就不存在了，其他线程就能拿到锁了
